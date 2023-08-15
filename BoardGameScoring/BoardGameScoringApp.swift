@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct BoardGameScoringApp: App {
+//    @StateObject private var dataModel = DataModel()
     var body: some Scene {
         WindowGroup {
-            MainView()
+            ContentView()
+//                .task {
+//                    do {
+//                        try await dataModel.load()
+//                    } catch {
+//                        fatalError("There was an error loading historical matches.")
+//                    }
+//                }
         }
     }
 }

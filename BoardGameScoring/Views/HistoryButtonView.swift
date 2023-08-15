@@ -1,32 +1,30 @@
 //
-//  NewGameButtonView.swift
+//  HistoryButtonView.swift
 //  BoardGameScoring
 //
-//  Created by Dennis Eaton on 6/12/23.
+//  Created by Dennis Eaton on 6/15/23.
 //
 
 import SwiftUI
 
-struct NewGameButtonView: View {
+struct HistoryButtonView: View {
     var body: some View {
-  
-        Button("New Game") {
+        Button("Match History") {
             
         }
         
-//        Text("New Game")
+//        Text("Match History")
 //            .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 15)
 //            .padding()
 //            .background(Color.blue)
 //            .foregroundColor(Color.white)
 //            .cornerRadius(10)
 //            .padding(.horizontal)
-        
     }
 }
 
-struct NewGameButtonView_Previews: PreviewProvider {
+struct HistoryButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGameButtonView()
+        HistoryButtonView()
     }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Timeline
+   version = "3.0">
+   <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/dennis/Developer/BoardGameScoring/NewMatch%20Debugging%20Playground.playground#CharacterRangeLen=11&amp;CharacterRangeLoc=10839&amp;EndingColumnNumber=15&amp;EndingLineNumber=326&amp;StartingColumnNumber=4&amp;StartingLineNumber=326&amp;Timestamp=710886681.679639"
+         selectedRepresentationIndex = "0">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/dennis/Developer/BoardGameScoring/NewMatch%20Debugging%20Playground.playground#CharacterRangeLen=9&amp;CharacterRangeLoc=10811&amp;EndingColumnNumber=13&amp;EndingLineNumber=324&amp;StartingColumnNumber=4&amp;StartingLineNumber=324&amp;Timestamp=710886681.679741"
+         selectedRepresentationIndex = "0">
+      </LoggerValueHistoryTimelineItem>
+   </TimelineItems>
+   <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "documentLocation"
+         selectedRepresentationIndex = "selectedRepresentationIndex">
+      </LoggerValueHistoryTimelineItem>
+   </TimelineItems>
+   <TimelineItems>
+   </TimelineItems>
+</Timeline>

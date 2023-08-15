@@ -16,16 +16,20 @@ struct GameCardView: View {
             Text(game.name)
                 .font(.title3)
                 .accessibilityLabel(game.name)
+            Spacer()
+            Image(systemName: "chevron.right")
         }
         .padding()
-        .foregroundColor(.secondary) // add logic to pick a forground color based on the background color of the cell/game
+        .foregroundColor(game.theme.accentColor)
         
     }
 }
 
 struct GameCardView_Previews: PreviewProvider {
+    static var game = Game.cascadia
     static var previews: some View {
-        GameCardView(game: cascadia)
+        GameCardView(game: game)
+            .background(game.theme.mainColor)
     }
 }
 

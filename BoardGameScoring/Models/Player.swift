@@ -8,21 +8,16 @@
 import Foundation
 
 struct Player: Codable, Identifiable {
-    let id: UUID
+//    let id: UUID
     var name: String
-    var wins: Int {
-        // Return the number of matches where the player had the highest score
-        return 0
-    }
-    var losses: Int {
-        // Return the number of matches where the player did not have the highest score.
-        return 0
+    var id: String {
+        self.name
     }
     
-    init(id: UUID = UUID(), name: String) {
-        self.id = id
-        self.name = name
-    }
+//    init(id: UUID(), name: String) {
+//        self.id = id
+//        self.name = name
+//    }
 }
 
 extension Player: Hashable {
@@ -33,4 +28,5 @@ extension Player: Hashable {
 
 extension Player {
     static let samplePlayers: [Player] = [Player(name: "Lisa"), Player(name: "Dennis"), Player(name: "John")]
+    static let emptyPlayer: Player = Player(name: "Empty")
 }

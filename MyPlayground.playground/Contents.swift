@@ -1,15 +1,7 @@
-//
-//  Games.swift
-//  BoardGameScoring
-//
-//  Created by Dennis Eaton on 6/3/23.
-//
-
+import UIKit
 import Foundation
-import SwiftUI
 
-
-enum Game: Int, Hashable, Identifiable, Codable, CaseIterable {
+enum Game: Int, Hashable, Identifiable, Codable {
     
     case cascadia, wingspan
     
@@ -42,5 +34,33 @@ enum Game: Int, Hashable, Identifiable, Codable, CaseIterable {
         case .wingspan:
             return ["End of Match Bird Cards", "Bird Cards", "Eggs", "End of Round Bonus", "Goal Cards"]
         }
+    }
+}
+
+import SwiftUI
+
+enum Theme: String, CaseIterable, Identifiable, Codable {
+
+    case banana
+    case blue
+    case bubblegum
+    case flora
+    case indigo
+    case orange
+    
+    var accentColor: Color {
+        switch self {
+        case .bubblegum, .banana, .flora, .orange: return .black
+        case .indigo, .blue: return .white
+        }
+    }
+    var mainColor: Color {
+        Color(rawValue)
+    }
+    var name: String {
+        rawValue
+    }
+    var id: String {
+        name
     }
 }
