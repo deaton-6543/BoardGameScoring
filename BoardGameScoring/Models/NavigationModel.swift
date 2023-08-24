@@ -12,21 +12,24 @@ final class NavigationModel: ObservableObject {
     @Published var selectedTab: ContentViewTab = .games     // The selected tab from the home screen
     @Published var gamePath: [GameDestination] = []         // Navigation path for the game score screens
     @Published var playersPath: [PlayerDestination] = []    // Navigation path for the player screens
-    @Published var path = NavigationPath() {
-        didSet {
-            save()
-        }
-    }
+    @Published var path: NavigationPath
     
     private let savePath = URL.documentsDirectory.appending(path: "NavigationPathStore")
-    
+
     init() {
+        print(savePath)
         if let data = try? Data(contentsOf: savePath) {
-            if let decoded = try? JSONDecoder().decode(NavigationPath.CodableRepresentation.self, from: data) {
-                path = NavigationPath(decoded)
-                return
+            do {
+                let decoded = try JSONDecoder().decode(NavigationPath.CodableRepresentation.self, from: data)
+                self.path = NavigationPath(decoded)
+                print(self.path)
+            } catch {
+                self.path = NavigationPath()
             }
+        } else {
+            self.path = NavigationPath()
         }
+        print(self.path)
     }
     
     func save() {
@@ -38,6 +41,16 @@ final class NavigationModel: ObservableObject {
         } catch {
             print("Failed to save navigation stack data")
         }
+    }
+    
+    func reset() {
+        print("Stack Depth: \(self.path.count)")
+        print(self.path)
+//        let count = self.path.count
+        self.path = NavigationPath()
+        print("Stack Depth: \(self.path.count)")
+        print(self.path)
+        save()
     }
 }
 

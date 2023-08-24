@@ -13,16 +13,7 @@ struct NewGameButtonView: View {
         Button("New Game") {
             
         }
-        
-//        Text("New Game")
-//            .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 15)
-//            .padding()
-//            .background(Color.blue)
-//            .foregroundColor(Color.white)
-//            .cornerRadius(10)
-//            .padding(.horizontal)
-        
-    }
+     }
 }
 
 struct NewGameButtonView_Previews: PreviewProvider {

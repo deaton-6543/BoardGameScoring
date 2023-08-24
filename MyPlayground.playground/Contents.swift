@@ -64,3 +64,11 @@ enum Theme: String, CaseIterable, Identifiable, Codable {
         name
     }
 }
+
+let savePath = URL.documentsDirectory.appending(path: "NavigationPathStore")
+print(savePath)
+
+let data = try? Data(contentsOf: savePath)
+
+
+

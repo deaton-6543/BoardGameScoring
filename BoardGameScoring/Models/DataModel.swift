@@ -8,17 +8,9 @@
 import Foundation
 import SwiftUI
 
-//protocol DataModelable: ObservableObject {
-//    var historicalMatches: [HistoricalMatch] { get set }
-//    var newMatch: NewMatch? { get set }
-//}
-//@MainActor
 class DataModel: ObservableObject, Codable {
     static let shared = DataModel()
-    
-//    @Published var historicalMatches: [HistoricalMatch] = []       // HistoricalMatch.sampleData
     var historicalMatches: [HistoricalMatch] = []
-//    @Published var newMatch: NewMatch?
     
     private static func fileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory,
@@ -52,10 +44,4 @@ class DataModel: ObservableObject, Codable {
     }
 
 }
-
-//class PreviewDataModel: DataModel {
-//    @Published var historicalMatches: [HistoricalMatch] = HistoricalMatch.sampleData
-//    @Published var newMatch: NewMatch?
-//}
-
 

@@ -19,11 +19,8 @@ struct LeaderBoardRowView: View {
             
             Text("Wins: \(playerRecord.wins)")
             Text("Losses: \(playerRecord.losses)")
-//            .padding()
         }
         .padding()
-//        Divider()
-//        .padding()
     }
 }
 

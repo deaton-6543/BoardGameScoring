@@ -8,16 +8,10 @@
 import Foundation
 
 struct Player: Codable, Identifiable {
-//    let id: UUID
     var name: String
     var id: String {
         self.name
     }
-    
-//    init(id: UUID(), name: String) {
-//        self.id = id
-//        self.name = name
-//    }
 }
 
 extension Player: Hashable {

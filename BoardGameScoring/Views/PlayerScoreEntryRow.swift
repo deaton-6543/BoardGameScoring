@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PlayerScoreEntryRow: View {
-//    @EnvironmentObject var viewModel: ViewModel
     @Binding var score: Score
     @State var playerScoreValue: Int = 0
     
@@ -21,12 +20,6 @@ struct PlayerScoreEntryRow: View {
                 .textFieldStyle(.roundedBorder)
                 .multilineTextAlignment(.trailing)
         }
-//        .onSubmit {
-//            score.score = playerScoreValue
-//        }
-//        .onDisappear {
-//            score.score = playerScoreValue
-//        }
     }
 }
 

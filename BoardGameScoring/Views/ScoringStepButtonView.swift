@@ -10,8 +10,6 @@ import SwiftUI
 struct ScoringStepButtonView: View {
     @EnvironmentObject var viewModel: ViewModel
     
-//    @Binding var scoringStep: StepScore
-//    @Binding var isPresentingScoringStep: Bool
     let index: Int
     
     var body: some View {

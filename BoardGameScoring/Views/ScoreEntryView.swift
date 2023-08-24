@@ -67,12 +67,6 @@ struct ScoreEntryView: View {
         
         playerScoreValues = viewModel.newMatch.stepScores[viewModel.stepScoreIndex].scores.map { $0.score }
         
-//        playerScoreValues = newMatch.stepScores[newMatch.stepScoreIndex].scores
-        
-        
-//        for score in newMatch.stepScores[newMatch.stepScoreIndex].scores {
-//            playerScoreValues = score.score
-//        }
     }
 }
 

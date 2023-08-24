@@ -78,8 +78,8 @@ import Foundation
     }
     
     func resetMatch() {
-        newMatch.startingNewMatch = true
-        newMatch.players = []
+        deleteNewMatchFile()
+        newMatch.resetNewMatch()
     }
     
     func ScoreStepsComplete() -> Bool {
@@ -115,6 +115,30 @@ import Foundation
         }
         let restoredNewMatch = try await task.value
         newMatch = restoredNewMatch
+    }
+    
+    func deleteNewMatchFile() {
+        
+//        func clearTempFolder() {
+//            let fileManager = FileManager.default
+//            let tempFolderPath = NSTemporaryDirectory()
+//            do {
+//                let filePaths = try fileManager.contentsOfDirectory(atPath: tempFolderPath)
+//                for filePath in filePaths {
+//                    try fileManager.removeItem(atPath: tempFolderPath + filePath)
+//                }
+//            } catch {
+//                print("Could not clear temp folder: \(error)")
+//            }
+//        }
+        
+        
+        do {
+            let fileURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("matchInProgress.data")
+            try FileManager().removeItem(at: fileURL)
+        } catch let error as NSError {
+            print("Error deleting newMatch file: \(error)")
+        }
     }
     
     func save() async throws {

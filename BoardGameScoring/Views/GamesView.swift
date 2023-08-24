@@ -11,10 +11,10 @@ struct GamesView: View {
     
     @EnvironmentObject var dataModel: DataModel
     @EnvironmentObject var navigationModel: NavigationModel
+    @Environment(\.scenePhase) private var scenePhase
     @StateObject var viewModel = ViewModel()
     
     var body: some View {
-//        NavigationStack(path: $navigationModel.gamePath) {
         NavigationStack(path: $navigationModel.path) {
             
             Spacer()
@@ -23,8 +23,6 @@ struct GamesView: View {
                 
                 Button {
                     viewModel.newMatch.game = game
-//                    newMatch.matchHistory = dataModel.historicalMatches
-//                    navigationModel.gamePath.append(.newMatch)
                     navigationModel.path.append(GameDestination.newMatch)
 
                 } label: {
@@ -32,13 +30,45 @@ struct GamesView: View {
                 }
                 .listRowBackground(game.theme.mainColor)
             }
+            .navigationDestination(for: GameDestination.self) { destination in
+                switch destination {
+                case .matchScore:
+                    ScoreGameView {
+                        Task {
+                            do {
+                                try await viewModel.save()
+                            } catch {
+                                fatalError(error.localizedDescription)
+                            }
+                        }
+                    }
+                case .matchHistory:
+                    Text("Placeholder")
+                case .newMatch:
+                    GameView {
+                        Task {
+                            do {
+                                try await viewModel.save()
+                            } catch {
+                                fatalError(error.localizedDescription)
+                            }
+                        }
+                    }
+                case .stepScore:
+                    ScoreEntryView()
+
+                }
+                
+             }
             
-            .navigationDestination(for: GameDestination.self, destination: { _ in
-                GameView()
-            })
             .navigationTitle("Score A Game")
         }
         .environmentObject(viewModel)
+        .onChange(of: scenePhase) { phase in
+            if phase == .inactive {
+                navigationModel.save()
+            }
+        }
     }
 }
 
