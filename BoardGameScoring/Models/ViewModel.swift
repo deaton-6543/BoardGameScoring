@@ -7,7 +7,8 @@
 
 import Foundation
 
-@MainActor class ViewModel: Identifiable, ObservableObject {
+//@MainActor 
+class ViewModel: Identifiable, ObservableObject {
     
     @Published var newMatch = NewMatch.shared
     @Published var stepScoreIndex: Int = 0
@@ -31,12 +32,17 @@ import Foundation
         
         // Initialize the scores array with the list of players
         for player in newMatch.players {
-            newMatch.scores.append(Score(player: player, score: 0))
+            newMatch.scores.append(Score(player: player, score: nil))
         }
     
         // Initialize the stepScores for each step in the game
         for step in newMatch.game.steps {
-            newMatch.stepScores.append(StepScore(step: step, scores: newMatch.scores, isComplete: false))
+            newMatch.stepScores.append(StepScore(step: step.key, stepText: step.value, scores: newMatch.scores, isComplete: false))
+        }
+        
+        // Intialize the list of bonusScores for the game
+        for bonus in newMatch.game.bonusScoring.keys {
+            newMatch.bonusScores.append(BonusScore(bonus: bonus))
         }
     }
         
@@ -51,11 +57,28 @@ import Foundation
         return leaderBoard
     }
     
-    func updateStepScores(scoreValues: [Int]) {
-        for index in newMatch.stepScores[stepScoreIndex].scores.indices {
-            newMatch.stepScores[stepScoreIndex].scores[index].score = scoreValues[index]
+    func updateStepScores(scoreValues: [Int?]) {
+        var unwrappedScoreValues: [Int] = []
+        for index in scoreValues.indices {
+            if let value = scoreValues[index] {
+                unwrappedScoreValues.append(value)
+            } else {
+                unwrappedScoreValues.append(0)
+            }
         }
-
+    
+        for index in newMatch.stepScores[stepScoreIndex].scores.indices {
+            newMatch.stepScores[stepScoreIndex].scores[index].score = unwrappedScoreValues[index]
+        }
+    }
+    
+    func updateBonusScore(stepScore: StepScore) {
+        guard let index = newMatch.bonusScores.firstIndex(where: { $0.bonus == stepScore.step }) else { return }
+        
+        // Call the bonus function and calculate the bonus score and the associated string description
+        let bonusScoreValues = newMatch.game.bonusScoring[newMatch.bonusScores[index].bonus]!(stepScore)
+        newMatch.bonusScores[index].bonusScores = bonusScoreValues.0 // update with the bonus scores
+        newMatch.bonusScores[index].bonusScoreString = bonusScoreValues.1 // update with the bonus string
     }
     
     func totalScores() {
@@ -70,7 +93,20 @@ import Foundation
         for stepScore in newMatch.stepScores {
             for score in stepScore.scores {
                 if let index = scoresTotal.firstIndex(where: { $0.player == score.player }) {
-                    scoresTotal[index].score += score.score
+                    if let playerScore = score.score {
+                        scoresTotal[index].score! += playerScore
+                    }
+                }
+            }
+        }
+        
+        // Accumulate the bonus scores
+        for bonusScore in newMatch.bonusScores {
+            for score in bonusScore.bonusScores {
+                if let index = scoresTotal.firstIndex(where: { $0.player == score.player}) {
+                    if let playerScore = score.score {
+                        scoresTotal[index].score! += playerScore
+                    }
                 }
             }
         }
@@ -118,20 +154,6 @@ import Foundation
     }
     
     func deleteNewMatchFile() {
-        
-//        func clearTempFolder() {
-//            let fileManager = FileManager.default
-//            let tempFolderPath = NSTemporaryDirectory()
-//            do {
-//                let filePaths = try fileManager.contentsOfDirectory(atPath: tempFolderPath)
-//                for filePath in filePaths {
-//                    try fileManager.removeItem(atPath: tempFolderPath + filePath)
-//                }
-//            } catch {
-//                print("Could not clear temp folder: \(error)")
-//            }
-//        }
-        
         
         do {
             let fileURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("matchInProgress.data")

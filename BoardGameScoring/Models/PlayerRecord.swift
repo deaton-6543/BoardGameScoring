@@ -58,7 +58,7 @@ struct PlayerRecord: Identifiable, Codable {
             // sort each matchScores in descending order and increment when
             // this player's score is first (a win)
             for matchScore in matchScores {
-                sortedMatchScore = matchScore.sorted { $0.score > $1.score }
+                sortedMatchScore = matchScore.sorted { $0.score! > $1.score! }
                             
                 if let index = sortedMatchScore.firstIndex(where: { $0.player == player }) {
                     if index == 0 { wins += 1 }

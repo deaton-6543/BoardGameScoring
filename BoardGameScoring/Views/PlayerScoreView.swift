@@ -14,7 +14,7 @@ struct PlayerScoreView: View {
         HStack {
             Text(playerScore.player.name)
             Spacer()
-            Text(String(playerScore.score))
+            Text(String(playerScore.score ?? 0))
         }
     }
 }

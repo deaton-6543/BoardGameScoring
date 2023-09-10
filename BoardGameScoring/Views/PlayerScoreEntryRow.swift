@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PlayerScoreEntryRow: View {
-    @Binding var score: Score
-    @State var playerScoreValue: Int = 0
+    var score: Score
+    @Binding var playerScoreValue: Int?
     
     var body: some View {
         HStack {
@@ -19,12 +19,20 @@ struct PlayerScoreEntryRow: View {
                 .keyboardType(.numberPad)
                 .textFieldStyle(.roundedBorder)
                 .multilineTextAlignment(.trailing)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("Done") {
+                            
+                        }
+                    }
+                }
         }
     }
 }
 
 struct PlayerScoreEntryRow_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerScoreEntryRow(score: .constant(NewMatch.sampleNewMatch.scores[0]))
+        PlayerScoreEntryRow(score: NewMatch.sampleNewMatch.scores[0], playerScoreValue: .constant(nil))
     }
 }

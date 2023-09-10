@@ -65,7 +65,10 @@ struct GameView: View {
                     } else {
                         Text("Continue Match")
                     }
-                }.frame(maxWidth: .infinity, alignment: .center)
+                }
+                .disabled(viewModel.newMatch.players.isEmpty)
+                .frame(maxWidth: .infinity, alignment: .center)
+                    
 
                 
             } header: {

@@ -21,19 +21,21 @@ class NewMatch: Identifiable, Codable {
     }
     var scores: [Score] = []
     var stepScores: [StepScore] = []
+    var bonusScores: [BonusScore] = []
     var players: [Player] = []
     var startingNewMatch = true
     var scoreStepsComplete: Bool {
         stepScores.count == stepScores.filter({ $0.isComplete }).count
     }
     
-    init(id: String = UUID().uuidString, date: Date = Date(), game: Game = .cascadia, scores: [Score] = [], players: [Player] = [], stepScores: [StepScore] = []) {
+    init(id: String = UUID().uuidString, date: Date = Date(), game: Game = .cascadia, scores: [Score] = [], players: [Player] = [], stepScores: [StepScore] = [], bonusScores: [BonusScore] = []) {
         self.id = id
         self.date = date
         self.game = game
         self.players = players
         self.scores = scores
         self.stepScores = stepScores
+        self.bonusScores = bonusScores
     }
     
     enum CodingKeys: String, CodingKey {
@@ -42,6 +44,7 @@ class NewMatch: Identifiable, Codable {
         case game
         case scores
         case stepScores
+        case bonusScores
         case players
         case startingNewMatch
         case scoreStepsComplete
@@ -54,6 +57,7 @@ class NewMatch: Identifiable, Codable {
         game = try values.decode(Game.self, forKey: .game)
         scores = try values.decode([Score].self, forKey: .scores)
         stepScores = try values.decode([StepScore].self, forKey: .stepScores)
+        bonusScores = try values.decode([BonusScore].self, forKey: .bonusScores)
         players = try values.decode([Player].self, forKey: .players)
         startingNewMatch = try values.decode(Bool.self, forKey: .startingNewMatch)
     }
@@ -65,6 +69,7 @@ class NewMatch: Identifiable, Codable {
         try container.encode(game, forKey: .game)
         try container.encode(scores, forKey: .scores)
         try container.encode(stepScores, forKey: .stepScores)
+        try container.encode(bonusScores, forKey: .bonusScores)
         try container.encode(players, forKey: .players)
         try container.encode(startingNewMatch, forKey: .startingNewMatch)
         try container.encode(scoreStepsComplete, forKey: .scoreStepsComplete)
@@ -98,6 +103,7 @@ class NewMatch: Identifiable, Codable {
         self.players = []
         self.scores = []
         self.stepScores = []
+        self.bonusScores = []
         self.startingNewMatch = true
     }
     
@@ -114,13 +120,14 @@ extension NewMatch: Equatable, Hashable {
 }
 
 extension NewMatch {
+    static let sampleStepText = "Some text that explains how to scrore this step."
     
     static var sampleNewMatch = NewMatch(game: .cascadia, scores: [Score(player: Player(name: "Lisa"), score: 5), Score(player: Player(name: "Dennis"), score: 6)], players: [Player(name: "Lisa"), Player(name: "Dennis")], stepScores: [
-        StepScore(step: "Bears", scores: [Score(player: Player(name: "Lisa"), score: 0), Score(player: Player(name: "Dennis"), score: 4)], isComplete: true),
-        StepScore(step: "Salmon", scores: [Score(player: Player(name: "Lisa"), score: 0), Score(player: Player(name: "Dennis"), score: 4)], isComplete: false),
-        StepScore(step: "Foxes", scores: [Score(player: Player(name: "Lisa"), score: 0), Score(player: Player(name: "Dennis"), score: 4)], isComplete: true),
-        StepScore(step: "Hawks", scores: [Score(player: Player(name: "Lisa"), score: 0), Score(player: Player(name: "Dennis"), score: 4)], isComplete: false),
-        StepScore(step: "Elk", scores: [Score(player: Player(name: "Lisa"), score: 0), Score(player: Player(name: "Dennis"), score: 4)], isComplete: true)
+        StepScore(step: "Bears", stepText: sampleStepText, scores: [Score(player: Player(name: "Lisa"), score: 0), Score(player: Player(name: "Dennis"), score: 4)], isComplete: true),
+        StepScore(step: "Salmon", stepText: sampleStepText, scores: [Score(player: Player(name: "Lisa"), score: 0), Score(player: Player(name: "Dennis"), score: 4)], isComplete: false),
+        StepScore(step: "Foxes", stepText: sampleStepText, scores: [Score(player: Player(name: "Lisa"), score: 0), Score(player: Player(name: "Dennis"), score: 4)], isComplete: true),
+        StepScore(step: "Hawks", stepText: sampleStepText, scores: [Score(player: Player(name: "Lisa"), score: 0), Score(player: Player(name: "Dennis"), score: 4)], isComplete: false),
+        StepScore(step: "Elk", stepText: sampleStepText, scores: [Score(player: Player(name: "Lisa"), score: 0), Score(player: Player(name: "Dennis"), score: 4)], isComplete: true)
         ]
         )
 

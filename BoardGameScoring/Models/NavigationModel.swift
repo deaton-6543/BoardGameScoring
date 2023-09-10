@@ -17,19 +17,16 @@ final class NavigationModel: ObservableObject {
     private let savePath = URL.documentsDirectory.appending(path: "NavigationPathStore")
 
     init() {
-        print(savePath)
         if let data = try? Data(contentsOf: savePath) {
             do {
                 let decoded = try JSONDecoder().decode(NavigationPath.CodableRepresentation.self, from: data)
                 self.path = NavigationPath(decoded)
-                print(self.path)
             } catch {
                 self.path = NavigationPath()
             }
         } else {
             self.path = NavigationPath()
         }
-        print(self.path)
     }
     
     func save() {
@@ -44,12 +41,7 @@ final class NavigationModel: ObservableObject {
     }
     
     func reset() {
-        print("Stack Depth: \(self.path.count)")
-        print(self.path)
-//        let count = self.path.count
         self.path = NavigationPath()
-        print("Stack Depth: \(self.path.count)")
-        print(self.path)
         save()
     }
 }

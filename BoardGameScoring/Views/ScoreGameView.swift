@@ -38,6 +38,15 @@ struct ScoreGameView: View {
                 } header: {
                     Text("Scoring Steps").font(.title2)
                 }
+                
+                Section {
+                    ForEach(viewModel.newMatch.bonusScores.indices, id: \.self) { index in
+                        BonusScoreRowView(bonusName: viewModel.newMatch.bonusScores[index].bonus, bonusScoreInfo: viewModel.newMatch.bonusScores[index].bonusScoreString)
+                    }
+                } header: {
+                    Text("Bonus Scores").font(.title2)
+                }
+
                 Button {
                     viewModel.resetMatch()
                     withAnimation {

@@ -9,6 +9,7 @@ import Foundation
 
 struct StepScore: Identifiable, Codable {
     let step: String
+    let stepText: String
     var scores: [Score]
     var isComplete: Bool
     // let scoringText = "Add text to each step that will appear on the scoring screen to tell the user
@@ -27,23 +28,19 @@ extension StepScore: Equatable {
 extension StepScore {
     static let scores: [Score] = [Score(player: Player(name: "Lisa"), score: 0), Score(player: Player(name: "Tom"), score: 4)]
     static let emptyScores: [Score] = []
+    static let sampleStepText = "Some text that explains how to scrore this step."
     static let sampleStepScores = [
-        StepScore(step: "Bears", scores: scores, isComplete: true),
-        StepScore(step: "Salmon", scores: scores, isComplete: false),
-        StepScore(step: "Foxes", scores: scores, isComplete: true),
-        StepScore(step: "Hawks", scores: scores, isComplete: false),
-        StepScore(step: "Elk", scores: scores, isComplete: true),
-        StepScore(step: "Mountains", scores: scores, isComplete: false),
-        StepScore(step: ".MountainsBonus", scores: scores, isComplete: true),
-        StepScore(step: "Water", scores: scores, isComplete: true),
-        StepScore(step: ".WaterBonus", scores: scores, isComplete: false),
-        StepScore(step: "Prarie", scores: scores, isComplete: true),
-        StepScore(step: ".PrarieBonus", scores: scores, isComplete: false),
-        StepScore(step: "Desert", scores: scores, isComplete: true),
-        StepScore(step: ".DesertBonus", scores: scores, isComplete: false),
-        StepScore(step: "Forest", scores: scores, isComplete: true),
-        StepScore(step: ".ForestBonus", scores: scores, isComplete: false),
-        StepScore(step: "Pine Cones", scores: scores, isComplete: true)
+        StepScore(step: "Bears", stepText: sampleStepText, scores: scores, isComplete: true),
+        StepScore(step: "Salmon", stepText: sampleStepText, scores: scores, isComplete: false),
+        StepScore(step: "Foxes", stepText: sampleStepText, scores: scores, isComplete: true),
+        StepScore(step: "Hawks", stepText: sampleStepText, scores: scores, isComplete: false),
+        StepScore(step: "Elk", stepText: sampleStepText, scores: scores, isComplete: true),
+        StepScore(step: "Mountains", stepText: sampleStepText, scores: scores, isComplete: false),
+        StepScore(step: "Water", stepText: sampleStepText, scores: scores, isComplete: true),
+        StepScore(step: "Prarie", stepText: sampleStepText, scores: scores, isComplete: true),
+        StepScore(step: "Desert", stepText: sampleStepText, scores: scores, isComplete: true),
+        StepScore(step: "Forest", stepText: sampleStepText, scores: scores, isComplete: true),
+        StepScore(step: "Pine Cones", stepText: sampleStepText, scores: scores, isComplete: true)
         ]
-    static let emptyStepScore = StepScore(step: "", scores: emptyScores, isComplete: false)
+    static let emptyStepScore = StepScore(step: "", stepText: sampleStepText, scores: emptyScores, isComplete: false)
 }

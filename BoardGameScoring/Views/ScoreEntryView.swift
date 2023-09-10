@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ScoreEntryView: View {
     @EnvironmentObject var viewModel: ViewModel
-    @State var playerScoreValues: [Int] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    @State var playerScoreValues: [Int?] = [nil, nil, nil, nil, nil, nil, nil, nil, nil]
+//    @State var playerScoreValues: [Int?] = []
+
     
 
     var body: some View {
@@ -18,51 +20,78 @@ struct ScoreEntryView: View {
         
         List {
             ForEach(playerScores.indices, id: \.self) { index in
+                
+//                PlayerScoreEntryRow(score: playerScores[index], playerScoreValue: $playerScoreValues[index])
+                
                 HStack {
                     Text(playerScores[index].player.name)
                     Spacer()
                     TextField("Score", value: $playerScoreValues[index], format: .number)
                         .keyboardType(.numberPad)
+                        .frame(width: 200)
                         .textFieldStyle(.roundedBorder)
                         .multilineTextAlignment(.trailing)
                 }
             }
+            Text(viewModel.newMatch.stepScores[stepScoreindex].stepText)
+                .multilineTextAlignment(.center)
          }
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Button("Cancel") {
+                    viewModel.isPresentingScoringStep = false
+                }
+                
+                Spacer()
+                
+                Button("Done") {
+                    viewModel.isPresentingScoringStep = false
+                    viewModel.newMatch.stepScores[viewModel.stepScoreIndex].isComplete = true
+                    viewModel.updateStepScores(scoreValues: playerScoreValues)
+                    viewModel.updateBonusScore(stepScore: viewModel.newMatch.stepScores[viewModel.stepScoreIndex])
+                    viewModel.totalScores()
+                }
+                
+            }
+//            ToolbarItem(placement: .keyboard) {
+//                Button("Done") {
+//                    viewModel.isPresentingScoringStep = false
+//                    viewModel.newMatch.stepScores[viewModel.stepScoreIndex].isComplete = true
+//                    viewModel.updateStepScores(scoreValues: playerScoreValues)
+//                    viewModel.updateBonusScore(stepScore: viewModel.newMatch.stepScores[viewModel.stepScoreIndex])
+//                    viewModel.totalScores()
+//                }
+//            }
+//            ToolbarItem(placement: .keyboard) {
+//                Button("Cancel") {
+//                    viewModel.isPresentingScoringStep = false
+//                }
+//            }
+        }
+
         .navigationTitle(viewModel.newMatch.stepScores[viewModel.stepScoreIndex].step)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
-                        viewModel.isPresentingScoringStep = false
-                        viewModel.newMatch.stepScores[viewModel.stepScoreIndex].isComplete = true
-                        viewModel.updateStepScores(scoreValues: playerScoreValues)
-                        viewModel.totalScores()
-                    }
-                }
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        viewModel.isPresentingScoringStep = false
-                        
-                        // need code to set the scores to zero if the .isComplete bool
-                        // is false when the cancel button was selected.
-                        
-                    }
-                }
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .confirmationAction) {
+//                    Button("Done") {
+//                        viewModel.isPresentingScoringStep = false
+//                        viewModel.newMatch.stepScores[viewModel.stepScoreIndex].isComplete = true
+//                        viewModel.updateStepScores(scoreValues: playerScoreValues)
+//                        viewModel.updateBonusScore(stepScore: viewModel.newMatch.stepScores[viewModel.stepScoreIndex])
+//                        viewModel.totalScores()
+//                    }
+//                }
+//                ToolbarItem(placement: .cancellationAction) {
+//                    Button("Cancel") {
+//                        viewModel.isPresentingScoringStep = false
+//                    }
+//                }
+//            }
             .onAppear {
                 initializeScores()
             }
     }
-    
-    // This method is not currently used
-    func initializePlayerScores() -> [Int] {
-        var scoreValues: [Int] = []
-        for score in viewModel.newMatch.stepScores[viewModel.stepScoreIndex].scores {
-            scoreValues.append(score.score)
-        }
-        return scoreValues
-    }
-    
+        
     func initializeScores() {
         
         playerScoreValues = viewModel.newMatch.stepScores[viewModel.stepScoreIndex].scores.map { $0.score }

@@ -34,6 +34,9 @@
 		95ADC2322A426B0700AEFAAA /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADC2312A426B0700AEFAAA /* Score.swift */; };
 		95BACD852A40D8DD0040EA9A /* PlayerScoreEntryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BACD842A40D8DD0040EA9A /* PlayerScoreEntryRow.swift */; };
 		95BACD872A40E8290040EA9A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BACD862A40E8290040EA9A /* Theme.swift */; };
+		95CC9F112AA6BB4B00A0A0EA /* BonusScoringFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CC9F102AA6BB4B00A0A0EA /* BonusScoringFunctions.swift */; };
+		95CC9F132AA6BC8400A0A0EA /* BonusScoreRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CC9F122AA6BC8400A0A0EA /* BonusScoreRowView.swift */; };
+		95CC9F152AA7B2C800A0A0EA /* BonusScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CC9F142AA7B2C800A0A0EA /* BonusScore.swift */; };
 		95DE1E152A65B243001A0AB1 /* ScoringStepButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE1E142A65B243001A0AB1 /* ScoringStepButtonView.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +70,9 @@
 		95ADC2312A426B0700AEFAAA /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		95BACD842A40D8DD0040EA9A /* PlayerScoreEntryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerScoreEntryRow.swift; sourceTree = "<group>"; };
 		95BACD862A40E8290040EA9A /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		95CC9F102AA6BB4B00A0A0EA /* BonusScoringFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusScoringFunctions.swift; sourceTree = "<group>"; };
+		95CC9F122AA6BC8400A0A0EA /* BonusScoreRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusScoreRowView.swift; sourceTree = "<group>"; };
+		95CC9F142AA7B2C800A0A0EA /* BonusScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusScore.swift; sourceTree = "<group>"; };
 		95DE1E142A65B243001A0AB1 /* ScoringStepButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoringStepButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +139,8 @@
 				9523D9552A4CB66A00ED5352 /* HistoricalMatch.swift */,
 				9523D9572A4E0EF500ED5352 /* DataModel.swift */,
 				95AD23092A8559B300CC2801 /* NewMatch.swift */,
+				95CC9F102AA6BB4B00A0A0EA /* BonusScoringFunctions.swift */,
+				95CC9F142AA7B2C800A0A0EA /* BonusScore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -161,6 +169,7 @@
 				9594651A2A423A6A00E4D085 /* ScoreEntryView.swift */,
 				95BACD842A40D8DD0040EA9A /* PlayerScoreEntryRow.swift */,
 				95DE1E142A65B243001A0AB1 /* ScoringStepButtonView.swift */,
+				95CC9F122AA6BC8400A0A0EA /* BonusScoreRowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -247,11 +256,14 @@
 				95ADC2322A426B0700AEFAAA /* Score.swift in Sources */,
 				95068C302A2BE72B00981154 /* GamesView.swift in Sources */,
 				95068C2E2A2BE72B00981154 /* BoardGameScoringApp.swift in Sources */,
+				95CC9F132AA6BC8400A0A0EA /* BonusScoreRowView.swift in Sources */,
 				95068C422A2BEBCD00981154 /* Games.swift in Sources */,
 				95BACD872A40E8290040EA9A /* Theme.swift in Sources */,
 				95AD230A2A8559B300CC2801 /* NewMatch.swift in Sources */,
 				95943F5C2A3BF25500981E1B /* HistoryButtonView.swift in Sources */,
+				95CC9F152AA7B2C800A0A0EA /* BonusScore.swift in Sources */,
 				9514CE8E2A44A1F5006F1C98 /* StepScore.swift in Sources */,
+				95CC9F112AA6BB4B00A0A0EA /* BonusScoringFunctions.swift in Sources */,
 				95A6C5E12A3649AB00B1DD0D /* GameCardView.swift in Sources */,
 				95068C3D2A2BE8C600981154 /* ViewModel.swift in Sources */,
 				95A422B82A3A5B8500C9B8BF /* LeaderBoardRowView.swift in Sources */,
