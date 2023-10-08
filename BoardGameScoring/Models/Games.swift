@@ -9,11 +9,17 @@ import Foundation
 import SwiftUI
 
 
-enum Game: Int, Hashable, Identifiable, Codable, CaseIterable {
+enum Game: String, Hashable, Identifiable, Codable, CaseIterable, Comparable {
+   
+    static func < (lhs: Game, rhs: Game) -> Bool {
+        return lhs.rawValue == rhs.rawValue
+    }
+    
     
     case cascadia, wingspan
     
-    var id: Int { rawValue }
+    var id: String { rawValue }
+    
     var name: String {
         switch self {
         case .cascadia: return "Cascadia"

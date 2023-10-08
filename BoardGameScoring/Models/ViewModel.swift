@@ -57,6 +57,53 @@ class ViewModel: Identifiable, ObservableObject {
         return leaderBoard
     }
     
+    func getGameMatchHistory() -> [HistoricalMatch] {
+        
+        var historicalMatches: [HistoricalMatch] = []
+        
+        // Filter to get only matches for the selected game
+        let previousGameMatches = DataModel.shared.historicalMatches.compactMap {
+            if ($0.game == newMatch.game.rawValue) {
+                return $0
+            } else {
+                return nil
+            }
+        }
+        
+        // Sort the players in the newMatch by alpha order
+        // Create a string from the array of sorted players to be used below
+        
+        let sortedPlayers = newMatch.players.sorted(by: { $0.name < $1.name })
+        let playerString = sortedPlayers.compactMap({ $0.name }).reduce("", { s1, s2 in
+            s1 + s2
+        })
+       
+        // Find historical matches for thie game between these players
+        // Step through each previousGameMatch
+            // Extract the players in the match into an array
+            // Sort the array of players in alpha order
+            // Create a string from the array of sorted players
+            // Check to see if this string == the reference string above
+            // If so, append this match to the array of historical matches for these players
+        
+        var matchPlayers: [String] = []
+        for match in previousGameMatches {
+            for matchScore in match.scores {
+                matchPlayers.append(matchScore.player.name)
+            }
+            
+            matchPlayers.sort()
+            let matchPlayersString = matchPlayers.reduce("", { s1, s2 in
+                s1 + s2
+            })
+
+            if playerString == matchPlayersString {
+                historicalMatches.append(match)
+            }
+        }
+        return historicalMatches
+    }
+    
     func updateStepScores(scoreValues: [Int?]) {
         var unwrappedScoreValues: [Int] = []
         for index in scoreValues.indices {
